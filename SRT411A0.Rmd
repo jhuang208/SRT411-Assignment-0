@@ -1,10 +1,12 @@
 ---
 title: "SRT411A0"
 author: "Jin Huang"
-git username: "jhuang208"
 date: '2018-02-16'
 output:
+  html_document:
+    df_print: paged
   pdf_document: default
+git username: jhuang208
 ---
 
 ```{r setup, include=FALSE}
