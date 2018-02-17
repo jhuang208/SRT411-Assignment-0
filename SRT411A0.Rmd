@@ -1,0 +1,196 @@
+---
+title: "SRT411A0"
+author: "Jin Huang"
+git username: "jhuang208"
+date: '2018-02-16'
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## 3.1 Calculator ToDo
+Compute the difference between 2014 and the start year at this university; and divide this by; the difference between 2014 and the year you were born. Multiply this with 100 to get the percentage of your life you have spent at this university. Use brackets if you need them.
+```{r}
+(2017-2014)/(2014-1995)*100
+```
+
+## 3.2 Workspace ToDo
+Repeat the previous ToDo, but with several
+steps in between. You can give the variables any name you want, but the name has to start with a letter
+```{r}
+a=2017-2014
+b=2017-1995
+(a)/(b)*100
+```
+
+## 3.4 Function ToDo
+```{r}
+v=c(4,5,8,11)
+sum(x=v)
+```
+
+## 3.5 Plots ToDo
+Plot 100 normal random numbers.
+```{r}
+p=rnorm(100)
+plot(p)
+```
+
+## 4 Help and documentation ToDo
+Find help for the sqrt function.
+```{r}
+help(sqrt)
+```
+
+## 5 Scripts ToDo
+Make a file called firstscript.R containing Rcode that generates 100 random numbers and
+plots them, and run this script several times.
+
+```{r}
+source("firstscript.R")
+
+```
+
+## 6.2 Matrices ToDo
+Put the numbers 31 to 60 in a vector named
+P and in a matrix with 6 rows and 5 columns
+named Q. Tip: use the function seq. Look at
+the different ways scalars, vectors and matrices are denoted in the workspace window.
+
+```{r}
+P=seq(from=31,to=60,by=1)
+Q=matrix(data=c(31:60),ncol = 5,nrow = 6)
+Q
+```
+
+## 6.3 Data Frames ToDo
+Make a script file which constructs three random
+normal vectors of length 100. Call these
+vectors x1, x2 and x3. Make a data frame called
+t with three columns (called a, b and c) containing
+respectively x1, x1+x2 and x1+x2+x3.
+Call the following functions for this data frame:
+plot(t) and sd(t). Can you understand the
+results? Rerun this script a few times.
+
+```{r}
+x1=rnorm(100)
+x2=rnorm(100)
+x3=rnorm(100)
+t=data.frame(a=x1,b=x1+x2,c=x1+x2+x3)
+plot(t)
+
+```
+## 7 Graphics ToDo
+Add these lines to the script file of the previous section. Try to find out, either by experimenting or by using the help, what the meaning is of rgb, the last argument of rgb, lwd, pch, cex.
+
+```{r}
+x1 = rnorm(100)
+x2 = rnorm(100)
+x3 = rnorm(100)
+t = data.frame(x1,x1+x2,x1+x2+x3)
+plot(t$x1, type="l", ylim=range(t), lwd=3, col=rgb(1,0,0,0.3))
+lines(t$b, type="s", lwd=2, col=rgb(0.3,0.4,0.3,0.9))
+points(t$c, pch=20, cex=4, col=rgb(0,0,1,0.3))
+```
+RGB: RGB Color Specification
+Pch: plotting 'character'
+cex: character (or symbol) expansion: a numerical vector. This works as a multiple of par("cex").
+lwd: line width
+
+## 8 Reading and writing data files ToDo
+Make a file called tst1.txt in Notepad from the example in Figure 4 and store it in your working directory. Write a script to read it, to multiply the column called g by 5 and to store it as tst2.txt
+
+```{r}
+d = read.table(file = "tst1.txt", header = TRUE)
+d1 = data.frame(a = c(1,2,4,8,16,32), g = c(2,4,8,16,32,64), x = c(3,6,12,24,48,96))
+d1
+write.table(d1$g*5, file = "tst2.txt", row.names = FALSE)
+d1$g*5
+```
+
+## 9 Not Available data ToDo
+Compute the mean of the square root of a vector of 100 random numbers. What happens?
+```{r}
+v=c(rnorm(100))
+mean(sqrt(v))
+```
+"NaNs produced"
+The issue is that a negative number was generated and used.
+
+```{r}
+v=c(runif(n=100, min = 0))
+v1=sqrt(v)
+mean(v1)
+```
+
+## 10.2 Dates ToDo
+Make a graph with on the x-axis: today, Sinterklaas 2014 and your next birthday and on the y-axis the number of presents you expect on each of these days. Tip: make two vectors first
+
+```{r}
+data1=strptime(c("20180211","20141205","20190120"),format = "%Y%m%d")
+data2=c(1,0,2)
+plot(data1,data2,xlab="date",ylab="presents",main="# of presents I expected")
+```
+
+## 11.2 For-loop ToDo
+Make a vector from 1 to 100. Make a for-loop which runs through the whole vector. Multiply the elements which are smaller than 5 and larger than 90 with 10 and the other elements with 0.1.
+```{r}
+a=seq(from=1,to=100)
+b=c()
+for(i in 1:100)
+ {if (i<5 | i >90)
+   {b[i]=a[i] * 10
+   }
+  else{
+   b[i]=a[i]*0.1
+   }
+}
+b
+```
+
+## 11.3 Writing your own function ToDo
+Write a function for the previous ToDo, so that you can feed it any vector you like (as argument). Use a for-loop in the function to do the computation with each element.Use the standard R function length
+in the specification of the counter. 
+```{r}
+k=1:10
+funct = function(arg1)
+{
+  l = length(arg1)
+  for(i in 1:l)
+  {
+    if (arg1[i] < 5 | arg1[i] > 90)
+    {
+      arg1[i] = arg1[i] * 10
+    } else
+    {
+      arg1[i] = arg1[i] * 0.1
+    }
+  }
+  return (arg1)
+}
+funct(arg1=k)
+```
